@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>METANIT.COM</title>
+</head>
+<body>
+<script>
+class Person {
+
+            constructor(personName, personAge) {
+                this.name = personName;
+                this.age = personAge;
+            }
+            print() {
+                console.log(`Name: ${this.name}  Age: ${this.age}`);
+            }
+        }
+        const tom = new Person("Tom", 37);
+        tom.print();    // Name: Tom  Age: 37
+        const bob = new Person("Bob", 41);
+        bob.print()     // Name: Bob  Age: 41
+
+        class Person {
+            #name = "undefined";
+            #age = 1;
+            constructor(name, age) {
+                this.#name = this.#checkName(name);
+                this.setAge(age);
+            }
+            #checkName(name) {
+                if (name !== "admin") return name;
+            }
+            setAge(age) {
+                if (age > 0 && age < 110) this.#age = age;
+            }
+            print() {
+                console.log(`Name: ${this.#name}  Age: ${this.#age}`);
+            }
+        }
+        const tom = new Person("Tom", 37);
+        tom.print();    // Name: Tom  Age: 37
+        const bob = new Person("admin", 41);
+        bob.print();    // Name: Undefined  Age 41
+        //let personName = bob.#checkName("admin"); // ! Ошибка - нельзя обратится к приватному методу
+
+        class Person {
+            static retirementAge = 65;
+            constructor(name, age) {
+                this.name = name;
+                this.age = age;
+            }
+            print() {
+                console.log(`Имя: ${this.name}  Возраст: ${this.age}`);
+            }
+        }
+
+        console.log(Person.retirementAge); // 65
+        Person.retirementAge = 62;
+        console.log(Person.retirementAge); // 62
+
+        class Person {
+            static #retirementAge = 65;
+            constructor(name, age) {
+                this.name = name;
+                this.age = age;
+            }
+            print() {
+                console.log(`Имя: ${this.name}  Возраст: ${this.age}`);
+            }
+            static calculateRestAges(person) {
+                if (this.#retirementAge > person.age) {
+                    const restAges = this.#retirementAge - person.age;
+                    console.log(`До пенсии осталось ${restAges} лет`);
+                }
+                else console.log("Вы уже на пенсии");
+            }
+        }
+        // console.log(Person.#retirementAge);  // ! Ошибка: поле retirementAge -приватное
+        const tom = new Person("Tom", 37);
+        Person.calculateRestAges(tom);      // До пенсии осталось 28 лет
+        const bob = new Person("Bob", 71);
+        Person.calculateRestAges(bob);      // Вы уже на пенсии
+
+        class Person {
+            constructor(firstName, lastName) {
+                this.firstName = firstName;
+                this.lastName = lastName;
+            }
+            get fullName() { return `${this.firstName} ${this.lastName}` }
+            set fullName(value) {
+                [this.firstName, this.lastName] = value.split(" ");
+            }
+        }
+        const tom = new Person("Tom", "Smith");
+        console.log(tom.fullName);  // Tom Smith
+        tom.fullName = "Tomas Jefferson";
+        console.log(tom.lastName);  // Jefferson
+
+        class Person {
+            constructor(name, age) {
+                this.name = name;
+                this.age = age;
+            }
+            print() {
+                console.log(`Name: ${this.name}  Age: ${this.age}`);
+            }
+        }
+        class Employee extends Person {
+
+            constructor(name, age, company) {
+                super(name, age);
+                this.company = company;
+            }
+            work() {
+                console.log(`${this.name} works in ${this.company}`);
+            }
+        }
+
+        const tom = new Person("Tom", 34);
+        tom.print();    // Name: Tom  Age: 34
+
+        const sam = new Employee("Sam", 25, "Google");
+        sam.print();    // Name: Sam  Age: 25
+        sam.work();     // Sam works in Google
+
+        class Person {
+            constructor(name, age) {
+                this.name = name;
+                this.age = age;
+            }
+            print() {
+                console.log(`Name: ${this.name}  Age: ${this.age}`);
+            }
+        }
+        class Employee extends Person {
+
+            constructor(name, age, company) {
+                super(name, age);
+                this.company = company;
+            }
+            print() {
+                super.print();
+                console.log(`Company: ${this.company}`);
+            }
+            work() {
+                console.log(`${this.name} works in ${this.company}`);
+            }
+        }
+        const sam = new Employee("Sam", 25, "Google");
+        sam.print();    // Name: Sam  Age: 25
+        // Company: Google
+
+        class Person {
+            #name;
+            constructor(name, age) {
+                this.#name = name;
+                this.age = age;
+            }
+            print() {
+                console.log(`Name: ${this.#name}  Age: ${this.age}`);
+            }
+        }
+        class Employee extends Person {
+
+            constructor(name, age, company) {
+                super(name, age);
+                this.company = company;
+            }
+            print() {
+                super.print();
+                console.log(`Company: ${this.company}`);
+            }
+            work() {
+                console.log(`${this.#name} works in ${this.company}`);  // ! Ошибка - поле #name недоступно из Employee
+            }
+        }
+
+</script>
+</body>
+</html>

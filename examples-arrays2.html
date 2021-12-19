@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>METANIT.COM</title>
+</head>
+<body>
+<script>
+        const users = new Array("Tom", "Bill", "Alice");
+        const people = ["Sam", "John", "Kate"];
+
+        console.log(users); // ["Tom", "Bill", "Alice"]
+        console.log(people); // ["Sam", "John", "Kate"]
+
+        const array = Array.from("Hello");
+        console.log(array); // ["H", "e", "l", "l", "o"]
+
+        const numbers = [1, 2, 3, 4];
+        const array = Array.from(numbers, n => n * n);
+        console.log(array); // [1, 4, 9, 16]
+
+        const array = Array.from({ length: 3 }, (element, index) => {
+            console.log(element);   // undefined
+            return index;
+        });
+        console.log(array); // [0, 1, 2]
+
+        const array = Array.from({ length: 3, "0": "Tom", "1": "Sam", "2": "Bob" }, (element) => {
+            console.log(element);
+            return element;
+        });
+        console.log(array); // ["Tom", "Sam", "Bob"]
+
+        const fruit = [];
+        fruit[0] = "яблоки";
+        fruit[1] = "груши";
+        fruit[2] = "сливы";
+
+        console.log("В массиве fruit ", fruit.length, " элемента");
+        for (let i = 0; i < fruit.length; i++)
+            console.log(fruit[i]);
+
+        const users = []; // в массиве 0 элементов
+        users[0] = "Tom";
+        users[1] = "Kate";
+        users[4] = "Sam";
+        for (let i = 0; i < users.length; i++)
+            console.log(users[i]);
+
+        const users = ["Tom", "Sam", "Bob"];
+        console.log(users);     //  ["Tom", "Sam", "Bill"]
+        const people1 = [...users];
+        const people2 = new Array(...users);
+        const people3 = Array.of(...users);
+        console.log(people1);     //  ["Tom", "Sam", "Bob"]
+        console.log(people2);     //  ["Tom", "Sam", "Bob"]
+        console.log(people3);     //  ["Tom", "Sam", "Bob"]
+
+        const users = ["Tom", "Sam", "Bob"];
+        console.log(users);     //  ["Tom", "Sam", "Bill"]
+        const people1 = [...users];
+        const people2 = new Array(...users);
+        const people3 = Array.of(...users);
+        console.log(people1);     //  ["Tom", "Sam", "Bob"]
+        console.log(people2);     //  ["Tom", "Sam", "Bob"]
+        console.log(people3);     //  ["Tom", "Sam", "Bob"]
+
+        const people1 = ["Tom", "Sam", "Bob", "Mike"];
+        const people2 = ["Alex", "Bill"];
+        function print(first, second, third) {
+            console.log(`${first}, ${second}, ${third}`);
+        }
+        print(...people1);  // Tom, Sam, Bob
+        print(...people2);  // Alex, Bill, undefined
+
+        const people = ["Sam", "Tom", "Bob"];
+        const employees = [...people];
+        employees[0] = "Dan";
+        console.log(employees);     // ["Dan", "Tom", "Bob"]
+        console.log(people);        //  ["Sam", "Tom", "Bob"]
+
+        const people = [{ name: "Sam" }, { name: "Tom" }, { name: "Bob" }];
+        const employees = [...people];
+        //employees[0] = {name: "Dan"};
+        employees[0].name = "Dan";
+        console.log(employees);     //  [{name:"Dan"}, {name:"Tom"}, {name:"Bob"}]
+        console.log(people);        //  [{name:"Dan"}, {name:"Tom"}, {name:"Bob"}]
+
+        const users = ["Tom", "Sam", "Bill"];
+        console.log(users);             //  ["Tom", "Sam", "Bill"]
+        const people = users.slice();       //  глубокое копирование
+
+        people[1] = "Mike";             //  изменяем второй элемент
+        console.log(users);             //  ["Tom", "Sam", "Bill"]
+        console.log(people);            //  ["Tom", "Mike", "Bill"]
+
+        const users = ["Tom", "Sam", "Bill", "Alice", "Kate"];
+        const people = users.slice(1, 4);
+        console.log(people);        // ["Sam", "Bill", "Alice"]
+
+        const people = [];
+        people.push("Tom");
+        people.push("Sam");
+        people.push("Bob", "Mike");
+
+        console.log("В массиве people элементов: ", people.length);
+        console.log(people); // ["Tom", "Sam", "Bob", "Mike"]
+
+        const people = ["Tom", "Sam", "Bob", "Mike"];
+
+        const lastPerson = people.pop(); // извлекаем из массива последний элемент
+        console.log(lastPerson);   // Mike
+        console.log(people);    // ["Tom", "Sam", "Bob"]
+
+        const people = ["Tom", "Sam", "Bob", "Mike"];
+
+        const firstPerson = people.shift(); // извлекаем из массива первый элемент
+        console.log(firstPerson);   // Tom
+        console.log(people);    // ["Sam", "Bob", "Mike"]
+
+        const people = ["Tom", "Sam", "Bob"];
+
+        people.unshift("Alice");
+        console.log(people);    // ["Alice", "Tom", "Sam", "Bob"]
+
+
+        const people = ["Tom", "Sam", "Bill", "Alice", "Kate"];
+        const deleted = people.splice(3);
+        console.log(deleted);       // [ "Alice", "Kate" ]
+        console.log(people);         // [ "Tom", "Sam", "Bill" ]
+
+        const men = ["Tom", "Sam", "Bob"];
+        const women = ["Alice", "Kate"];
+        const people = men.concat(women);
+        console.log(people);         // ["Tom", "Sam", "Bob", "Alice", "Kate"]
+
+        const people = ["Tom", "Sam", "Bob"];
+
+        const peopleToString = people.join("; ");
+        console.log(peopleToString);         // Tom; Sam; Bob
+
+
+        const people = ["Tom", "Sam", "Bob"];
+
+        people.sort();
+        console.log(people);         // ["Bob", "Sam", "Tom"]
+
+        const numbers = [200, 15, 5, 35];
+
+        numbers.sort((a, b) => a - b);
+        console.log(numbers);         // [5, 15, 35, 200]
+
+
+
+        const people = ["Tom", "Sam", "Bob"];
+
+        people.reverse();
+        console.log(people);         // ["Bob", "Sam", "Tom"]
+
+        const people = ["Tom", "Sam", "Bob", "Tom", "Alice", "Sam"];
+
+        const firstIndex = people.indexOf("Tom");
+        const lastIndex = people.lastIndexOf("Tom");
+        const otherIndex = people.indexOf("Mike");
+        console.log(firstIndex); // 0
+        console.log(lastIndex);  // 3
+        console.log(otherIndex); // -1
+
+        const people = ["Tom", "Sam", "Bob", "Tom", "Alice", "Sam"];
+
+        console.log(people.includes("Tom"));    // true - Tom есть в массиве
+        console.log(people.includes("Kate"))    // false - Kate нет в массиве
+
+        const numbers = [1, -12, 8, -4, 25, 42];
+        const passed = numbers.every(n => n > 0);
+        console.log(passed); // false
+
+        const numbers = [1, -12, 8, -4, 25, 42];
+        const passed = numbers.some(n => n > 0);
+        console.log(passed); // true
+
+        const numbers = [1, -12, 8, -4, 25, 42];
+        const filteredNumbers = numbers.filter(n => n > 0);
+        console.log(filteredNumbers); // [1, 8, 25, 42]
+
+        const numbers = [1, 2, 3, 4, 5, 6];
+
+        numbers.forEach(n =>
+            console.log("Квадрат числа", n, "равен", n * n)
+        );
+
+
+        const numbers = [1, 2, 3, 5, 8, 13, 21, 34];
+
+        // получаем первый элемент, который больше 10
+        let found = numbers.find(n => n > 10);
+        console.log(found); // 13
+
+
+        const numbers = [1, 2, 3, 5, 8, 13, 21, 34];
+
+        // получаем индекс первого элемента, который больше 10
+        let foundIndex = numbers.findIndex(n => n > 10);
+        console.log(foundIndex);    // 5
+
+
+        const people = ["Tom", "Bob", ["Alice", "Kate", ["Sam", "Ann"]]];
+        const flattenPeople = people.flat();
+        console.log(flattenPeople); // ["Tom", "Bob", "Alice", "Kate", ["Sam", "Ann"]]
+
+        class Team extends Array {
+
+            constructor(name, ...members) {
+                super(...members);
+                this.name = name;
+            }
+            push(person) {
+                if (person !== "admin") super.push(person);
+            }
+        }
+
+        const snowbars = new Team("SnowBars", "Tom", "Sam", "Bob");
+
+        snowbars.push("admin");     // добавим один элемент - admin
+        console.log(snowbars);      // Team(3) ["Tom", "Sam", "Bob"]
+        snowbars.push("Tim");       // добавим один элемент - Tim
+        console.log(snowbars);      // Team(4) ["Tom", "Sam", "Bob", "Tim"]
+</script>
+</body>
+</html>
